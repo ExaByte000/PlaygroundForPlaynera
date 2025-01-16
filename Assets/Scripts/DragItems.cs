@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class DragItems : MonoBehaviour
+public class DragItems : Sounds
 {
     Animator anim;
     Rigidbody2D rb;
@@ -14,6 +14,12 @@ public class DragItems : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
+
+    private void OnMouseDown()
+    {
+        PlaySound(sounds[0]);
+    }
+
     private void OnMouseDrag()
     {
         anim.SetBool("Picked", true);
@@ -26,7 +32,7 @@ public class DragItems : MonoBehaviour
     private void OnMouseUp() 
     {
         OnDragEnd?.Invoke();
-
+        PlaySound(sounds[1]);
         anim.SetBool("Picked", false);
         rb.gravityScale = 0.5f;
     }
